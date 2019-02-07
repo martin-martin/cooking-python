@@ -1,4 +1,6 @@
 # CLASSES AND OBJECT-ORIENTED PROGRAMMING
+
+
 class Ingredient:
     """Models an ingredient including its name and amount."""
     def __init__(self, name, amount):
@@ -9,7 +11,35 @@ class Ingredient:
         return f"There are {self.amount} of {self.name}."
 
     def use(self, use_amount):
+        """Reduces the amount of ingredient available."""
         self.amount -= use_amount
+
+    def expire(self):
+        """Expires the ingredient item."""
+        print(f"whoops, these {self.name} went bad...")
+        self.name = "expired " + self.name
+
+
+# INHERITANCE: build a subclass called Spice
+
+
+class Spice(Ingredient):
+    # customize the __init__() method
+    def __init__(self, name, amount, taste):
+        super().__init__(name, amount)
+        self.taste = taste
+
+    # create a custom method grind()
+    def grind(self):
+        print(f"you have now {self.amount} of ground {self.name}")
+
+    # override the expire() method
+    def expire(self):
+        if self.name == 'salt':
+            print(f"{self.name} never expires! ask the sea!")
+        else:
+            print(f"this {self.name} went bad...")
+            self.name = f"expired {self.name}"
 
 
 # Here is the code to create a Soup object with the functionality shown in the video
@@ -32,11 +62,11 @@ class Soup:
     def __str__(self):
         return f"""Here's some yummy\n
 {self.name}-
-,adPPYba,  ,adPPYba,  88       88 8b,dPPYba,   
-I8[    "" a8"     "8a 88       88 88P'    "8a  
- `"Y8ba,  8b       d8 88       88 88       d8  
-aa    ]8I "8a,   ,a8" "8a,   ,a88 88b,   ,a8"  
-`"YbbdP"'  `"YbbdP"'   `"YbbdP'Y8 88`YbbdP"'   
-                                  88           
+,adPPYba,  ,adPPYba,  88       88 8b,dPPYba,
+I8[    "" a8"     "8a 88       88 88P'    "8a
+ `"Y8ba,  8b       d8 88       88 88       d8
+aa    ]8I "8a,   ,a8" "8a,   ,a88 88b,   ,a8"
+`"YbbdP"'  `"YbbdP"'   `"YbbdP'Y8 88`YbbdP"'
+                                  88
                                   88
 serves {self.serves}."""
